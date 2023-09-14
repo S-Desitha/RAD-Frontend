@@ -8,7 +8,7 @@
 }
 body {
   background: #f1f1f1;
-  background-image: url(Images/background1.jpg);
+  background-image: url(images/background1.jpg);
   margin: 0;
   font-family: "Poppins";
 }
@@ -72,11 +72,12 @@ header a {
 label, input {
   display: block;
 }
+
 input {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
-  width: 50%;
+  width: 80%;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
@@ -127,12 +128,12 @@ input.error {
 }
 
 .nav-button:hover {
-  background-color: #0a0f4d; 
+  background-color: #0a0f4d;
   color: #fff;
 }
 
 nav-button:hover {
-  background-color: #000; 
+  background-color: #000;
   color: #fff;
 }
 
@@ -147,7 +148,7 @@ nav a {
 
 /* auth forms */
 form.signup, form.login {
-  max-width: 400px;
+  max-width: 300px;
   margin: 40px auto;
   padding: 20px;
   background: #fff;
@@ -178,10 +179,20 @@ form.signup, form.login {
 }
 
 .ed-button:hover {
-  background-color: #7b0fa2; 
+  background-color: #7b0fa2;
   color: #fff;
 }
 
 #paswword {
   font-size: 10px;
+}
+
+form.signup input, form.login input{
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
