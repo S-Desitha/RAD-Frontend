@@ -28,6 +28,7 @@ const Signup = () => {
         onChange={(e) => setPassword(e.target.value)} 
         value={password} 
       />
+      <p id="paswword">Password should include lowerCase, Uppercase, Symbols, digits and should be more than 8 characters</p>
 
       <button disabled={isLoading}>Sign up</button>
       {error && <div className="error">{error}</div>}

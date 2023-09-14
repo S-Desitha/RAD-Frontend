@@ -8,6 +8,7 @@
 }
 body {
   background: #f1f1f1;
+  background-image: url(Images/background1.jpg);
   margin: 0;
   font-family: "Poppins";
 }
@@ -75,7 +76,7 @@ input {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
-  width: 100%;
+  width: 50%;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
@@ -121,8 +122,13 @@ input.error {
   border: none;
   border-radius: 4px;
   text-decoration: none;
-  font-weight: bold;
+  font-size: 15px;
   transition: background-color 0.3s ease-in-out;
+}
+
+.nav-button:hover {
+  background-color: #0a0f4d; 
+  color: #fff;
 }
 
 nav-button:hover {
@@ -148,3 +154,34 @@ form.signup, form.login {
   border-radius: 4px;
 }
 
+.logout{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.ed-button {
+  background-color: #6607a1;
+  color: #fff;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 15px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.ed-button:hover {
+  background-color: #7b0fa2; 
+  color: #fff;
+}
+
+#paswword {
+  font-size: 10px;
+}

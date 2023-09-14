@@ -163,8 +163,8 @@ function Students() {
               <p>Country: {student.country}</p>
               <p>Birth Date: {student.birth_Date}</p>
               <p>Email: {student.email}</p>
-              <button onClick={() => handleDeleteStudent(student._id)}>Delete</button>
-              <button onClick={() => handleEditStudent(student)}>Edit</button>
+              <button class="ed-button" onClick={() => handleDeleteStudent(student._id)}>Delete</button>
+              <button class="ed-button" onClick={() => handleEditStudent(student)}>Edit</button>
             </li>
           ))}
         </ul>

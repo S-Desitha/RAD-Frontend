@@ -138,8 +138,8 @@ function Announcements() {
               {announcement.updatedAt && (
                 <p>Last Edited: {new Date(announcement.updatedAt).toLocaleString()}</p>
               )}
-              <button onClick={() => handleEditAnnouncement(announcement)}>Edit</button>
-              <button onClick={() => handleDeleteAnnouncement(announcement._id)}>Delete</button>
+              <button class="ed-button" onClick={() => handleEditAnnouncement(announcement)}>Edit</button>
+              <button class="ed-button" onClick={() => handleDeleteAnnouncement(announcement._id)}>Delete</button>
             </li>
           ))}
         </ul>

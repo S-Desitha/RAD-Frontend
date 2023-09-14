@@ -20,13 +20,16 @@ const Navbar = () => {
         <nav>
           {user && (
             <div className="nav-buttons">
-              <span>{user.email}</span>
-              <button onClick={handleClick}>Log out</button>
-              <Link to="/" className="nav-button">Courses</Link>
-              <Link to="/Anns" className="nav-button">Announcements</Link>
-              <Link to="/students" className="nav-button">Students</Link>
-              <Link to="/teachers" className="nav-button">Teachers</Link>
-
+              <div>
+                <span>{user.email}</span>
+              </div>
+              <div>
+                <button class="nav-button" onClick={handleClick}>Log out</button>
+                <Link to="/" className="nav-button">Courses</Link>
+                <Link to="/Anns" className="nav-button">Announcements</Link>
+                <Link to="/students" className="nav-button">Students</Link>
+                <Link to="/teachers" className="nav-button">Teachers</Link>
+              </div>
             </div>
           )}
           {!user && (
