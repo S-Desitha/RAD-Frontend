@@ -3,7 +3,7 @@
 
 /* layout */
 :root {
-  --primary: #1aac83;
+  --primary: #2187e0;
   --error: #e7195a;
 }
 body {
@@ -66,6 +66,7 @@ header a {
   border-radius: 50%;
   color: #333;
 }
+
 /* new workout form */
 label, input {
   display: block;
@@ -87,7 +88,13 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
+  margin-right: 10px;
 }
+
+button:hover {
+  background: #163f81; /* Change color on hover */
+}
+
 div.error {
   padding: 10px;
   background: #ffefef;
@@ -96,6 +103,33 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
+
 input.error {
   border: 1px solid var(--error);
 }
+
+/* Add these styles to customize the navigation buttons */
+.nav-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-button {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+
+nav-button:hover {
+  background-color: #000; 
+  color: #fff;
+}
+
+
+
+

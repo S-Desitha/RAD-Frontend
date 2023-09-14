@@ -7,11 +7,12 @@ function Announcements() {
     a_title: '',
     a_body: '',
   });
+  const [editingAnnouncement, setEditingAnnouncement] = useState(null);
 
   // Function to fetch announcements from the backend
   const fetchAnnouncements = () => {
     axios
-      .get('/api/announcements')
+      .get('/api/Anns')
       .then((response) => {
         setAnnouncements(response.data);
       })
@@ -24,8 +25,8 @@ function Announcements() {
   const handleCreateAnnouncement = (e) => {
     e.preventDefault();
     axios
-      .post('/api/announcements', newAnnouncement)
-      .then((response) => {
+      .post('/api/Anns', newAnnouncement)
+      .then(() => {
         // Clear the form and update the list of announcements
         setNewAnnouncement({ a_title: '', a_body: '' });
         fetchAnnouncements();
@@ -33,6 +34,44 @@ function Announcements() {
       .catch((error) => {
         console.error('Error creating announcement:', error);
       });
+  };
+
+  // Function to handle form submission for updating an existing announcement
+  const handleUpdateAnnouncement = (e) => {
+    e.preventDefault();
+    if (!editingAnnouncement) return;
+
+    axios
+      .patch(`/api/Anns/${editingAnnouncement._id}`, newAnnouncement)
+      .then(() => {
+        setEditingAnnouncement(null);
+        setNewAnnouncement({ a_title: '', a_body: '' });
+        fetchAnnouncements();
+      })
+      .catch((error) => {
+        console.error('Error updating announcement:', error);
+      });
+  };
+
+  // Function to handle deleting an announcement
+  const handleDeleteAnnouncement = (id) => {
+    axios
+      .delete(`/api/Anns/${id}`)
+      .then(() => {
+        fetchAnnouncements();
+      })
+      .catch((error) => {
+        console.error('Error deleting announcement:', error);
+      });
+  };
+
+  // Function to populate the form fields with the current announcement data
+  const handleEditAnnouncement = (announcement) => {
+    setEditingAnnouncement(announcement);
+    setNewAnnouncement({
+      a_title: announcement.a_title,
+      a_body: announcement.a_body,
+    });
   };
 
   useEffect(() => {
@@ -44,8 +83,8 @@ function Announcements() {
     <div>
       <h1>Announcements</h1>
 
-      {/* Form for creating a new announcement */}
-      <form onSubmit={handleCreateAnnouncement}>
+      {/* Form for creating or updating an announcement */}
+      <form onSubmit={editingAnnouncement ? handleUpdateAnnouncement : handleCreateAnnouncement}>
         <div>
           <label htmlFor="a_title">Title:</label>
           <input
@@ -68,7 +107,20 @@ function Announcements() {
           />
         </div>
         <div>
-          <button type="submit">Create Announcement</button>
+          <button type="submit">
+            {editingAnnouncement ? 'Update Announcement' : 'Make an Announcement'}
+          </button>
+          {editingAnnouncement && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditingAnnouncement(null);
+                setNewAnnouncement({ a_title: '', a_body: '' });
+              }}
+            >
+              Cancel
+            </button>
+          )}
         </div>
       </form>
 
@@ -80,6 +132,12 @@ function Announcements() {
             <li key={announcement._id}>
               <h3>{announcement.a_title}</h3>
               <p>{announcement.a_body}</p>
+              <p>Created: {new Date(announcement.createdAt).toLocaleString()}</p>
+              {announcement.updatedAt && (
+                <p>Last Edited: {new Date(announcement.updatedAt).toLocaleString()}</p>
+              )}
+              <button onClick={() => handleEditAnnouncement(announcement)}>Edit</button>
+              <button onClick={() => handleDeleteAnnouncement(announcement._id)}>Delete</button>
             </li>
           ))}
         </ul>
