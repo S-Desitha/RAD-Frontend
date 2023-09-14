@@ -179,8 +179,8 @@ function Teachers() {
               <p>Birth Date: {teacher.birth_Date}</p>
               <p>Email: {teacher.email}</p>
               <p>Subjects: {teacher.Subjects}</p>
-              <button onClick={() => handleDeleteTeacher(teacher._id)}>Delete</button>
-              <button onClick={() => handleEditTeacher(teacher)}>Edit</button>
+              <button class="ed-button" onClick={() => handleDeleteTeacher(teacher._id)}>Delete</button>
+              <button class="ed-button" onClick={() => handleEditTeacher(teacher)}>Edit</button>
             </li>
           ))}
         </ul>
