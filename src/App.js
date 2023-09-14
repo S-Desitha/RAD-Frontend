@@ -1,10 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext'
 
-// Import components and pages
-import Navbar from './components/Navbar';
+// Import your components
 import Home from './pages/Home';
-import Announcements from './pages/Announcements'; // Make sure the path is correct
+
+import Announcements from './pages/Announcements';
+import Students from './pages/Students';
+import Teachers from './pages/Teachers'; // Import the Teachers component
+import Navbar from './components/Navbar';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
@@ -19,14 +22,17 @@ function App() {
         <Navbar />
         <div className="pages">
           <Routes>
+
+            
+            <Route path="/Anns" element={<Announcements />} />
+            <Route path="/students" element={<Students />} />
+            <Route path="/teachers" element={<Teachers />} /> {/* Add the route for Teachers */}
+
             <Route 
               path="/" 
               element={user ? <Home /> : <Navigate to="/login"  />} 
             />
-            <Route 
-              path="/announcements" 
-              element={<Announcements />} 
-            />
+            
             <Route 
               path="/login" 
               element={!user ? <Login /> : <Navigate to="/"  />} 
@@ -35,6 +41,7 @@ function App() {
               path="/signup" 
               element={!user ? <Signup /> : <Navigate to="/"  />} 
             />
+
           </Routes>
         </div>
       </BrowserRouter>
