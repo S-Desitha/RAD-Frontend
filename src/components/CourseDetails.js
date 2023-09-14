@@ -1,21 +1,24 @@
-
 import React, { useState } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { useCoursesContext } from '../hooks/useCoursesContext';
-import { useAuthContext } from '../hooks/useAuthContext'
-
-// date fns
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const CourseDetails = ({ course }) => {
   const { dispatch } = useCoursesContext();
+  const { user } = useAuthContext();
   const [isEditing, setIsEditing] = useState(false);
   const [updatedCourse, setUpdatedCourse] = useState(course);
 
   const handleDeleteClick = async () => {
+    if (!user) {
+      return;
+    }
+
     const response = await fetch('/api/courses/' + course._id, {
       method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+      },
     });
     const json = await response.json();
 
@@ -34,35 +37,24 @@ const CourseDetails = ({ course }) => {
   };
 
   const handleUpdateClick = async () => {
+    if (!user) {
+      return;
+    }
+
     const response = await fetch('/api/courses/' + course._id, {
       method: 'PATCH',
       body: JSON.stringify(updatedCourse),
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`,
       },
     });
     const json = await response.json();
 
-  const { dispatch } = useCoursesContext()
-  const { user } = useAuthContext()
-
-  const handleClick = async () => {
-
-    if (!user) {
-      return
-    }
-
-    const response = await fetch('/api/courses/' + course._id, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    })
-    const json = await response.json()
-
-
     if (response.ok) {
       dispatch({ type: 'UPDATE_COURSE', payload: json });
+
+      // Exit editing mode after successful update
       setIsEditing(false);
     }
   };

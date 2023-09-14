@@ -16,7 +16,7 @@ const Navbar = () => {
     <header>
       <div className="container">
 
-        <h1>Student Management System</h1>      
+        <h1>School Admin Management System</h1>      
         <nav>
           {user && (
             <div className="nav-buttons">
