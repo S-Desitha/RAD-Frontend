@@ -1,6 +1,12 @@
+
 import React, { useState } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { useCoursesContext } from '../hooks/useCoursesContext';
+import { useAuthContext } from '../hooks/useAuthContext'
+
+// date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 
 const CourseDetails = ({ course }) => {
   const { dispatch } = useCoursesContext();
@@ -36,6 +42,24 @@ const CourseDetails = ({ course }) => {
       },
     });
     const json = await response.json();
+
+  const { dispatch } = useCoursesContext()
+  const { user } = useAuthContext()
+
+  const handleClick = async () => {
+
+    if (!user) {
+      return
+    }
+
+    const response = await fetch('/api/courses/' + course._id, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
+    const json = await response.json()
+
 
     if (response.ok) {
       dispatch({ type: 'UPDATE_COURSE', payload: json });

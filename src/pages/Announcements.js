@@ -26,7 +26,9 @@ function Announcements() {
     e.preventDefault();
     axios
       .post('/api/Anns', newAnnouncement)
+
       .then(() => {
+
         // Clear the form and update the list of announcements
         setNewAnnouncement({ a_title: '', a_body: '' });
         fetchAnnouncements();
