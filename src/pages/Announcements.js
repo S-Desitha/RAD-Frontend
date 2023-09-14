@@ -11,7 +11,7 @@ function Announcements() {
   // Function to fetch announcements from the backend
   const fetchAnnouncements = () => {
     axios
-      .get('/api/announcements')
+      .get('/api/Anns')
       .then((response) => {
         setAnnouncements(response.data);
       })
@@ -24,7 +24,7 @@ function Announcements() {
   const handleCreateAnnouncement = (e) => {
     e.preventDefault();
     axios
-      .post('/api/announcements', newAnnouncement)
+      .post('/api/Anns', newAnnouncement)
       .then((response) => {
         // Clear the form and update the list of announcements
         setNewAnnouncement({ a_title: '', a_body: '' });
