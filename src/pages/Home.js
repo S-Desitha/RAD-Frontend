@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useCoursesContext } from "../hooks/useCoursesContext"
 
 // components
 import CourseDetails from "../components/CourseDetails"
+import CourseForm from "../components/CourseForm"
 
 const Home = () => {
-  const [courses, setCourses] = useState(null)
+  const { courses, dispatch } = useCoursesContext()
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -12,12 +14,12 @@ const Home = () => {
       const json = await response.json()
 
       if (response.ok) {
-        setCourses(json)
+        dispatch({type: 'SET_COURSES', payload: json})
       }
     }
 
     fetchCourses()
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="home">
@@ -26,6 +28,7 @@ const Home = () => {
           <CourseDetails course={course} key={course._id} />
         ))}
       </div>
+      <CourseForm />
     </div>
   )
 }
