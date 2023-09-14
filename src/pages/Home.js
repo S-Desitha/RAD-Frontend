@@ -1,23 +1,31 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useCoursesContext } from "../hooks/useCoursesContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 // components
 import CourseDetails from "../components/CourseDetails"
+import CourseForm from "../components/CourseForm"
 
 const Home = () => {
-  const [courses, setCourses] = useState(null)
+  const { courses, dispatch } = useCoursesContext()
+  const {user} = useAuthContext()
 
   useEffect(() => {
     const fetchCourses = async () => {
-      const response = await fetch('/api/courses')
+      const response = await fetch('/api/courses', {
+        headers: {'Authorization': `Bearer ${user.token}`},
+      })
       const json = await response.json()
 
       if (response.ok) {
-        setCourses(json)
+        dispatch({type: 'SET_COURSES', payload: json})
       }
     }
 
-    fetchCourses()
-  }, [])
+    if (user) {
+      fetchCourses()
+    }
+  }, [dispatch, user])
 
   return (
     <div className="home">
@@ -26,6 +34,7 @@ const Home = () => {
           <CourseDetails course={course} key={course._id} />
         ))}
       </div>
+      <CourseForm />
     </div>
   )
 }
